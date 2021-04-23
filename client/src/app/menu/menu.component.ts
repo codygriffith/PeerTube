@@ -1,16 +1,26 @@
-import { ViewportScroller } from '@angular/common'
 import { HotkeysService } from 'angular2-hotkeys'
 import * as debug from 'debug'
 import { switchMap } from 'rxjs/operators'
+import { ViewportScroller } from '@angular/common'
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
+import {
+  AuthService,
+  AuthStatus,
+  AuthUser,
+  MenuLink,
+  MenuService,
+  RedirectService,
+  ScreenService,
+  ServerService,
+  UserService
+} from '@app/core'
 import { scrollToTop } from '@app/helpers'
-import { AuthService, AuthStatus, AuthUser, MenuService, RedirectService, ScreenService, ServerService, UserService } from '@app/core'
 import { LanguageChooserComponent } from '@app/menu/language-chooser.component'
 import { QuickSettingsModalComponent } from '@app/modal/quick-settings-modal.component'
-import { ServerConfig, UserRight, VideoConstant } from '@shared/models'
-import { NgbDropdown, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap'
 import { PeertubeModalService } from '@app/shared/shared-main/peertube-modal/peertube-modal.service'
+import { NgbDropdown, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap'
+import { ServerConfig, UserRight, VideoConstant } from '@shared/models'
 
 const logger = debug('peertube:menu:MenuComponent')
 
@@ -34,6 +44,8 @@ export class MenuComponent implements OnInit {
   nsfwPolicy: string
 
   currentInterfaceLanguage: string
+
+  commonMenuLinks: MenuLink[] = []
 
   private languages: VideoConstant<string>[] = []
   private serverConfig: ServerConfig
@@ -67,11 +79,9 @@ export class MenuComponent implements OnInit {
   }
 
   get dropdownContainer () {
-    if (this.isInMobileView) {
-      return null
-    } else {
-      return this.dropdownConfig.container
-    }
+    if (this.isInMobileView) return null
+
+    return this.dropdownConfig.container
   }
 
   get language () {
@@ -85,7 +95,10 @@ export class MenuComponent implements OnInit {
   ngOnInit () {
     this.serverConfig = this.serverService.getTmpConfig()
     this.serverService.getConfig()
-      .subscribe(config => this.serverConfig = config)
+      .subscribe(config => {
+        this.serverConfig = config
+        this.buildMenuLinks()
+      })
 
     this.isLoggedIn = this.authService.isLoggedIn()
     if (this.isLoggedIn === true) {
@@ -244,6 +257,10 @@ export class MenuComponent implements OnInit {
     } else {
       document.querySelector('menu').removeEventListener('scroll', this.onMenuScrollEvent)
     }
+  }
+
+  private buildMenuLinks () {
+    this.commonMenuLinks = this.menuService.buildCommonLinks(this.serverConfig)
   }
 
   private buildUserLanguages () {
