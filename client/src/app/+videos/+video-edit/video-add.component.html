@@ -41,6 +41,18 @@
       </ng-template>
     </ng-container>
 
+
+    <ng-container ngbNavItem *ngIf="isVideoImportHttpEnabled()">
+      <a ngbNavLink>
+        <span i18n>Mirror with URL</span>
+      </a>
+
+      <ng-template ngbNavContent>
+        <my-video-mirror-url #videoMirrorUrl (firstStepDone)="onFirstStepDone('import-url', $event)" (firstStepError)="onError()"></my-video-mirror-url>
+      </ng-template>
+    </ng-container>
+
+
     <ng-container ngbNavItem *ngIf="isVideoImportTorrentEnabled()">
       <a ngbNavLink>
         <span i18n>Import with torrent</span>

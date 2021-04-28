@@ -5,6 +5,7 @@ import { VideoEditType } from './shared/video-edit.type'
 import { VideoGoLiveComponent } from './video-add-components/video-go-live.component'
 import { VideoImportTorrentComponent } from './video-add-components/video-import-torrent.component'
 import { VideoImportUrlComponent } from './video-add-components/video-import-url.component'
+import { VideoMirrorUrlComponent } from './video-add-components/video-mirror-url.component'
 import { VideoUploadComponent } from './video-add-components/video-upload.component'
 
 @Component({
@@ -15,6 +16,7 @@ import { VideoUploadComponent } from './video-add-components/video-upload.compon
 export class VideoAddComponent implements OnInit, CanComponentDeactivate {
   @ViewChild('videoUpload') videoUpload: VideoUploadComponent
   @ViewChild('videoImportUrl') videoImportUrl: VideoImportUrlComponent
+  @ViewChild('videoMirrorUrl') videoMirrorUrl: VideoMirrorUrlComponent
   @ViewChild('videoImportTorrent') videoImportTorrent: VideoImportTorrentComponent
   @ViewChild('videoGoLive') videoGoLive: VideoGoLiveComponent
 
@@ -66,6 +68,7 @@ export class VideoAddComponent implements OnInit, CanComponentDeactivate {
 
   canDeactivate (): { canDeactivate: boolean, text?: string} {
     if (this.secondStepType === 'import-url') return this.videoImportUrl.canDeactivate()
+    if (this.secondStepType === 'mirror-url') return this.videoMirrorUrl.canDeactivate()
     if (this.secondStepType === 'import-torrent') return this.videoImportTorrent.canDeactivate()
     if (this.secondStepType === 'go-live') return this.videoGoLive.canDeactivate()
 
