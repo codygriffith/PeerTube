@@ -228,7 +228,7 @@ function buildVideo (channelId: number, body: VideoImportCreate, importData: You
     name: body.name || importData.name || 'Unknown name',
     remote: false,
     category: body.category || importData.category,
-    mirrorUrl: body.mirrorUrl || importData.mirrorUrl,
+    mirrorUrl: body.mirrorUrl,
     licence: body.licence || importData.licence,
     language: body.language || importData.language,
     commentsEnabled: body.commentsEnabled !== false, // If the value is not "false", the default is "true"
