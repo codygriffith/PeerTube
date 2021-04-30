@@ -8,6 +8,7 @@ import { removeElementFromArray } from '@app/helpers'
 import {
   VIDEO_CATEGORY_VALIDATOR,
   VIDEO_CHANNEL_VALIDATOR,
+  VIDEO_MIRROR_URL_VALIDATOR,
   VIDEO_DESCRIPTION_VALIDATOR,
   VIDEO_LANGUAGE_VALIDATOR,
   VIDEO_LICENCE_VALIDATOR,
@@ -62,6 +63,7 @@ export class VideoEditComponent implements OnInit, OnDestroy {
   readonly SPECIAL_SCHEDULED_PRIVACY = VideoEdit.SPECIAL_SCHEDULED_PRIVACY
 
   videoPrivacies: VideoConstant<VideoPrivacy>[] = []
+  mirrorUrl: string
   videoCategories: VideoConstant<number>[] = []
   videoLicences: VideoConstant<number>[] = []
   videoLanguages: VideoLanguages[] = []
@@ -111,6 +113,7 @@ export class VideoEditComponent implements OnInit, OnDestroy {
       name: VIDEO_NAME_VALIDATOR,
       privacy: VIDEO_PRIVACY_VALIDATOR,
       channelId: VIDEO_CHANNEL_VALIDATOR,
+      mirrorUrl: VIDEO_MIRROR_URL_VALIDATOR,
       nsfw: null,
       commentsEnabled: null,
       downloadEnabled: null,

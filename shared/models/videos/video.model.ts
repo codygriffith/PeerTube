@@ -15,6 +15,7 @@ export interface Video {
   publishedAt: Date | string
   originallyPublishedAt: Date | string
   category: VideoConstant<number>
+  mirrorUrl: string
   licence: VideoConstant<number>
   language: VideoConstant<string>
   privacy: VideoConstant<VideoPrivacy>

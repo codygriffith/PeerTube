@@ -14,6 +14,7 @@ export interface VideoUpdate {
   nsfw?: boolean
   waitTranscoding?: boolean
   channelId?: number
+  mirrorUrl?: string
   thumbnailfile?: Blob
   previewfile?: Blob
   scheduleUpdate?: VideoScheduleUpdate

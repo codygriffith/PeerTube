@@ -4,6 +4,7 @@ export class VideoEdit implements VideoUpdate {
   static readonly SPECIAL_SCHEDULED_PRIVACY = -1
 
   category: number
+  mirrorUrl: string
   licence: number
   language: string
   description: string
@@ -34,11 +35,13 @@ export class VideoEdit implements VideoUpdate {
       downloadEnabled: boolean,
       support: string,
       thumbnailUrl: string,
-      previewUrl: string
+      previewUrl: string,
+      mirrorUrl: string
     }) {
     if (video) {
       this.id = video.id
       this.uuid = video.uuid
+      this.mirrorUrl = video.mirrorUrl
       this.category = video.category.id
       this.licence = video.licence.id
       this.language = video.language.id
@@ -96,6 +99,7 @@ export class VideoEdit implements VideoUpdate {
   toFormPatch () {
     const json = {
       category: this.category,
+      mirrorUrl: this.mirrorUrl,
       licence: this.licence,
       language: this.language,
       description: this.description,

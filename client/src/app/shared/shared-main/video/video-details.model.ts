@@ -19,6 +19,7 @@ export class VideoDetails extends Video implements VideoDetailsServerModel {
   account: Account
   commentsEnabled: boolean
   downloadEnabled: boolean
+  mirrorUrl: string
 
   waitTranscoding: boolean
   state: VideoConstant<VideoState>
@@ -41,6 +42,7 @@ export class VideoDetails extends Video implements VideoDetailsServerModel {
     this.support = hash.support
     this.commentsEnabled = hash.commentsEnabled
     this.downloadEnabled = hash.downloadEnabled
+    this.mirrorUrl = hash.mirrorUrl
 
     this.trackerUrls = hash.trackerUrls
     this.streamingPlaylists = hash.streamingPlaylists

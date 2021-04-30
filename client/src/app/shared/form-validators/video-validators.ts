@@ -41,6 +41,11 @@ export const VIDEO_LANGUAGE_VALIDATOR: BuildFormValidator = {
   MESSAGES: {}
 }
 
+export const VIDEO_MIRROR_URL_VALIDATOR: BuildFormValidator = {
+  VALIDATORS: [ ],
+  MESSAGES: {}
+}
+
 export const VIDEO_IMAGE_VALIDATOR: BuildFormValidator = {
   VALIDATORS: [ ],
   MESSAGES: {}

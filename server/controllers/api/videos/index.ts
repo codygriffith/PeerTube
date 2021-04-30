@@ -316,6 +316,7 @@ async function updateVideo (req: express.Request, res: express.Response) {
 
       if (videoInfoToUpdate.name !== undefined) videoInstance.name = videoInfoToUpdate.name
       if (videoInfoToUpdate.category !== undefined) videoInstance.category = videoInfoToUpdate.category
+      if (videoInfoToUpdate.mirrorUrl !== undefined) videoInstance.mirrorUrl = videoInfoToUpdate.mirrorUrl
       if (videoInfoToUpdate.licence !== undefined) videoInstance.licence = videoInfoToUpdate.licence
       if (videoInfoToUpdate.language !== undefined) videoInstance.language = videoInfoToUpdate.language
       if (videoInfoToUpdate.nsfw !== undefined) videoInstance.nsfw = videoInfoToUpdate.nsfw
@@ -502,6 +503,7 @@ async function listVideos (req: express.Request, res: express.Response) {
     sort: req.query.sort,
     includeLocalVideos: true,
     categoryOneOf: req.query.categoryOneOf,
+    // mirrorUrlOneOf: req.query.mirrorUrlOneOf,
     licenceOneOf: req.query.licenceOneOf,
     languageOneOf: req.query.languageOneOf,
     tagsOneOf: req.query.tagsOneOf,

@@ -72,7 +72,8 @@ export class VideoMirrorUrlComponent extends VideoSend implements OnInit, AfterV
       waitTranscoding: false,
       commentsEnabled: true,
       downloadEnabled: true,
-      channelId: this.firstStepChannelId
+      channelId: this.firstStepChannelId,
+      mirrorUrl: this.targetUrl
     }
 
     this.loadingBar.useRef().start()
@@ -108,6 +109,7 @@ export class VideoMirrorUrlComponent extends VideoSend implements OnInit, AfterV
             this.video = new VideoEdit(Object.assign(video, {
               commentsEnabled: videoUpdate.commentsEnabled,
               downloadEnabled: videoUpdate.downloadEnabled,
+              mirrorUrl: this.targetUrl,
               privacy: { id: this.firstStepPrivacyId },
               support: null,
               thumbnailUrl,

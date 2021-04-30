@@ -29,6 +29,7 @@ loadLanguages()
 type VideoAttributes = {
   name?: string
   category?: number
+  mirrorUrl?: string
   licence?: number
   language?: string
   nsfw?: boolean
@@ -364,6 +365,7 @@ async function uploadVideo (url: string, accessToken: string, videoAttributesArg
   const attributes = Object.assign({
     name: 'my super video',
     category: 5,
+    mirrorUrl: 'djawdioa',
     licence: 4,
     language: 'zh',
     channelId: defaultChannelId,
@@ -402,6 +404,9 @@ async function uploadVideo (url: string, accessToken: string, videoAttributesArg
   }
   if (attributes.category !== undefined) {
     req.field('category', attributes.category.toString())
+  }
+  if (attributes.mirrorUrl !== undefined) {
+    req.field('mirrorUrl', attributes.mirrorUrl)
   }
   if (attributes.licence !== undefined) {
     req.field('licence', attributes.licence.toString())
@@ -460,6 +465,7 @@ function updateVideo (
 
   if (attributes.name) body['name'] = attributes.name
   if (attributes.category) body['category'] = attributes.category
+  if (attributes.mirrorUrl) body['mirrorUrl'] = attributes.mirrorUrl
   if (attributes.licence) body['licence'] = attributes.licence
   if (attributes.language) body['language'] = attributes.language
   if (attributes.nsfw !== undefined) body['nsfw'] = JSON.stringify(attributes.nsfw)
@@ -528,6 +534,7 @@ async function completeVideoCheck (
   attributes: {
     name: string
     category: number
+    mirrorUrl: string
     licence: number
     language: string
     nsfw: boolean
@@ -571,6 +578,7 @@ async function completeVideoCheck (
   expect(video.name).to.equal(attributes.name)
   expect(video.category.id).to.equal(attributes.category)
   expect(video.category.label).to.equal(attributes.category !== null ? VIDEO_CATEGORIES[attributes.category] : 'Misc')
+  expect(video.mirrorUrl).to.equal(attributes.category)
   expect(video.licence.id).to.equal(attributes.licence)
   expect(video.licence.label).to.equal(attributes.licence !== null ? VIDEO_LICENCES[attributes.licence] : 'Unknown')
   expect(video.language.id).to.equal(attributes.language)
